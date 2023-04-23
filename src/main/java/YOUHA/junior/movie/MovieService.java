@@ -4,24 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 public class MovieService {
-
     private final MovieRepository movieRepository;
-
-    @Transactional
-    public MovieResponseDto uploadMovie(MovieRequestDto movieRequestDto, HttpServletRequest request) {
-        Movie movie =new Movie(movieRequestDto);
-        movieRepository.save(movie);
-        return new MovieResponseDto(movie);
-    }
-
-
     @Transactional(readOnly = true)
     public List<MovieResponseDto> getMovies() {
         List<MovieResponseDto> list = new ArrayList<>();
@@ -34,4 +24,28 @@ public class MovieService {
         }
         return list;
     }
+
+    public MovieResponseDto getMovie(Long movie_id) {
+
+        Movie movie = movieRepository.findById(movie_id).orElseThrow(
+                () -> new IllegalArgumentException("게시물이 존재하지않음")
+        );
+        return new MovieResponseDto(movie);
+    }
+    @Transactional
+    public MovieResponseDto uploadMovie(MovieRequestDto movieRequestDto) {
+        Movie movie =new Movie(movieRequestDto);
+        movieRepository.save(movie);
+        return new MovieResponseDto(movie);
+    }
+
+    public MovieResponseDto updateMovie(Long movie_id, MovieRequestDto movieRequestDto) {
+        Movie movie = movieRepository.findById(movie_id).orElseThrow(
+                () -> new NoSuchElementException("해당 데이터는 존재하지 않습니다.")
+        );
+        movie.update(movieRequestDto);
+        Movie updatedMovie = movieRepository.save(movie);
+        return new MovieResponseDto(updatedMovie);
+    }
+
 }

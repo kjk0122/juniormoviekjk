@@ -41,4 +41,17 @@ public class Movie {
         this.dubbingLanguages = movieRequestDto.getDubbingLanguages();
         this.subtitleLanguages = movieRequestDto.getSubtitleLanguages();
     }
+    public void update(MovieRequestDto movieRequestDto) {
+        this.title= movieRequestDto.getTitle();
+        this.releaseYear = movieRequestDto.getReleaseYear();
+        this.genre = movieRequestDto.getGenre();
+        this.director = movieRequestDto.getDirector();
+        this.actors = movieRequestDto.getActors();
+        this.rating = movieRequestDto.getRating();
+        this.runtime = movieRequestDto.getRuntime();
+        this.synopsis = movieRequestDto.getSynopsis();
+        this.ageRating = movieRequestDto.getAgeRating();
+        this.dubbingLanguages = movieRequestDto.getDubbingLanguages();
+        this.subtitleLanguages = movieRequestDto.getSubtitleLanguages();
+    }
 }
