@@ -24,16 +24,4 @@ public class RestApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<RestApiException> handleApiRequestException(Exception ex) {
-        RestApiException restApiException = new RestApiException();
-        restApiException.setHttpStatus(HttpStatus.BAD_REQUEST.value());
-        restApiException.setErrorMessage(ex.getMessage());
-
-        return new ResponseEntity<>(
-                restApiException,
-                HttpStatus.BAD_REQUEST
-        );
-    }
-
 }
