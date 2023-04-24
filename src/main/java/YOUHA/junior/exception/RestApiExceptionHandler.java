@@ -1,5 +1,6 @@
 package YOUHA.junior.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,8 @@ public class RestApiExceptionHandler {
     public ResponseEntity<String> handleRuntimeException(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
-
+    @ExceptionHandler(value = { InvalidFormatException.class })
+    protected ResponseEntity<String> handleInvalidFormatException(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
+    }
 }
