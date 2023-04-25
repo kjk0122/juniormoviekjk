@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class RestApiExceptionHandler {
     @ExceptionHandler({NoSuchElementException.class, EmptyResultDataAccessException.class})
     public ResponseEntity<String> handleNotFoundException(Exception e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
@@ -22,10 +22,22 @@ public class RestApiExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<String> handleRuntimeException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        return ResponseEntity.internalServerError().body(e.getMessage());
     }
-    @ExceptionHandler(value = { InvalidFormatException.class })
+    @ExceptionHandler({InvalidFormatException.class})
     protected ResponseEntity<String> handleInvalidFormatException(Exception e) {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
+        return ResponseEntity.unprocessableEntity().body(e.getMessage());
     }
+    @ExceptionHandler({ConflictException.class})
+    public ResponseEntity<String> handleConflictException(Exception e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class ConflictException extends RuntimeException {
+        public ConflictException(String message) {
+            super(message);
+        }
+    }
+
+
 }

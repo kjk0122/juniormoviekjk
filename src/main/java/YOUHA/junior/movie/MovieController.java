@@ -3,10 +3,12 @@ package YOUHA.junior.movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,10 +33,12 @@ public class MovieController {
 
     @ApiOperation(value = "영화 정보 올리기")
     @PostMapping("")
-    public ResponseEntity<MovieResponseDto> uploadMovie(@RequestBody MovieRequestDto movieRequestDto){
+    public ResponseEntity<MovieResponseDto> uploadMovie(@Valid @RequestBody MovieRequestDto movieRequestDto,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
         MovieResponseDto movieResponseDto = movieService.uploadMovie(movieRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(movieResponseDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieResponseDto);
     }
 
     @ApiOperation(value = "영화 정보 수정하기")

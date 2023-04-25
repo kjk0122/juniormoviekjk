@@ -1,5 +1,6 @@
 package YOUHA.junior.movie;
 
+import YOUHA.junior.exception.RestApiExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,10 @@ public class MovieService {
     }
     @Transactional
     public MovieResponseDto uploadMovie(MovieRequestDto movieRequestDto) {
+        Optional<Movie> found = movieRepository.findByTitle(movieRequestDto.getTitle());
+        if (found.isPresent()) {
+            throw new RestApiExceptionHandler.ConflictException("이미 입력된 정보입니다.");
+        }
         Movie movie =new Movie(movieRequestDto);
         movieRepository.save(movie);
         return new MovieResponseDto(movie);
