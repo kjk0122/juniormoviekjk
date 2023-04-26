@@ -1,12 +1,15 @@
 package YOUHA.junior.movie;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovieRequestDto {
     @NotBlank(message = "제목은 필수 입력 값입니다.")
     private String title;
