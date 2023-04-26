@@ -5,16 +5,21 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class RestApiExceptionHandler {
     @ExceptionHandler({NoSuchElementException.class, EmptyResultDataAccessException.class})
-    public ResponseEntity<String> handleNotFoundException(Exception e) {
+    public ResponseEntity<String> handleNoSuchElementException(Exception e) {
         return ResponseEntity.notFound().build();
     }
 
+    @ExceptionHandler(HttpClientErrorException.NotFound.class)
+    public ResponseEntity<String> handleNotFoundException(Exception e) {
+        return ResponseEntity.notFound().build();
+    }
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<String> handleBadRequestException(Exception e) {
         return ResponseEntity.badRequest().body(e.getMessage());
@@ -28,6 +33,7 @@ public class RestApiExceptionHandler {
     protected ResponseEntity<String> handleInvalidFormatException(Exception e) {
         return ResponseEntity.unprocessableEntity().body(e.getMessage());
     }
+
     @ExceptionHandler({ConflictException.class})
     public ResponseEntity<String> handleConflictException(Exception e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());

@@ -19,9 +19,19 @@ public class MovieController {
 
     @ApiOperation(value = "영화 정보 가져오기")
     @GetMapping("")
-    public List<MovieResponseDto> getMovies(){
-        // 응답 보내기
-        return movieService.getMovies();
+    public List<MovieResponseDto> getMovies(@RequestParam(required = false) String title,
+                                            @RequestParam(required = false) Short releaseYear,
+                                            @RequestParam(required = false) String genre,
+                                            @RequestParam(required = false) String director,
+                                            @RequestParam(required = false) List<String> actors,
+                                            @RequestParam(required = false) Float rating,
+                                            @RequestParam(required = false) Short runtime,
+                                            @RequestParam(required = false) String synopsis,
+                                            @RequestParam(required = false) Short ageRating,
+                                            @RequestParam(required = false) List<String> dubbingLanguages,
+                                            @RequestParam(required = false) List<String> subtitleLanguages) {
+        // 검색어를 포함한 영화 정보 가져오기
+        return movieService.getMovies(title, releaseYear, genre, director, actors, rating, runtime, synopsis, ageRating, dubbingLanguages, subtitleLanguages);
     }
 
     @ApiOperation(value = "단일 영화 정보 가져오기")

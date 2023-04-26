@@ -6,26 +6,23 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class MovieService {
     private final MovieRepository movieRepository;
-    public List<MovieResponseDto> getMovies() {
-        List<MovieResponseDto> list = new ArrayList<>();
-
-        List<Movie> movieList;
-        movieList = movieRepository.findAllByOrderById();
-
-        for (Movie movie : movieList) {
-            list.add(new MovieResponseDto(movie));
-        }
-        return list;
+    public List<MovieResponseDto> getMovies(String title, Short releaseYear, String genre, String director,
+                                            List<String> actors, Float rating, Short runtime, String synopsis,
+                                            Short ageRating, List<String> dubbingLanguages, List<String> subtitleLanguages) {
+        return movieRepository.findByConditions(
+                title, releaseYear, genre, director, actors, rating, runtime, synopsis, ageRating, dubbingLanguages, subtitleLanguages
+        ).stream().map(MovieResponseDto::new).collect(Collectors.toList());
     }
+
 
     public MovieResponseDto getMovie(Long movie_id) {
         Movie movie = movieRepository.findById(movie_id).orElseThrow(
