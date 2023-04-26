@@ -53,7 +53,10 @@ public class MovieController {
 
     @ApiOperation(value = "영화 정보 수정하기")
     @PutMapping("/{movie_id}")
-    public ResponseEntity<Void> updateMovie(@PathVariable Long movie_id, @RequestBody MovieRequestDto movieRequestDto) {
+    public ResponseEntity<Void> updateMovie(@PathVariable Long movie_id, @Valid @RequestBody MovieRequestDto movieRequestDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
         movieService.updateMovie(movie_id, movieRequestDto);
         return ResponseEntity.noContent().build();
     }

@@ -34,7 +34,7 @@ public class MovieService {
     public MovieResponseDto uploadMovie(MovieRequestDto movieRequestDto) {
         Optional<Movie> found = movieRepository.findByTitle(movieRequestDto.getTitle());
         if (found.isPresent()) {
-            throw new RestApiExceptionHandler.ConflictException("이미 입력된 정보입니다.");
+            throw new RestApiExceptionHandler.ConflictException("이미 입력된 제목입니다.");
         }
         Movie movie =new Movie(movieRequestDto);
         movieRepository.save(movie);

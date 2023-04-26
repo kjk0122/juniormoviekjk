@@ -13,12 +13,12 @@ import java.util.NoSuchElementException;
 public class RestApiExceptionHandler {
     @ExceptionHandler({NoSuchElementException.class, EmptyResultDataAccessException.class})
     public ResponseEntity<String> handleNoSuchElementException(Exception e) {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
     public ResponseEntity<String> handleNotFoundException(Exception e) {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<String> handleBadRequestException(Exception e) {
