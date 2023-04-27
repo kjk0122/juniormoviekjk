@@ -18,7 +18,7 @@
 
     http://localhost:8080/swagger-ui.html
 
-![API image](img src="https://file.notion.so/f/s/a93e1e85-73fd-422d-98ad-f4cbd7d4195b/Untitled.png?id=e303541a-ac01-484c-befd-abd7620593ce&table=block&spaceId=1c944271-6073-4a3a-810c-c28369cda247&expirationTimestamp=1682641909045&signature=KwrnwzwRMFMEXjP5cgOf3urszcPngwoy3HyFMGii8iQ&downloadName=Untitled.png")
+![API](https://file.notion.so/f/s/a93e1e85-73fd-422d-98ad-f4cbd7d4195b/Untitled.png?id=e303541a-ac01-484c-befd-abd7620593ce&table=block&spaceId=1c944271-6073-4a3a-810c-c28369cda247&expirationTimestamp=1682641909045&signature=KwrnwzwRMFMEXjP5cgOf3urszcPngwoy3HyFMGii8iQ&downloadName=Untitled.png)
 
 3. 데이터는 H2 저장소를 통해 확인할수 있습니다.
 
