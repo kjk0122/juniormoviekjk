@@ -1,6 +1,3 @@
-Swagger
-<img src="https://file.notion.so/f/s/a93e1e85-73fd-422d-98ad-f4cbd7d4195b/Untitled.png?id=e303541a-ac01-484c-befd-abd7620593ce&table=block&spaceId=1c944271-6073-4a3a-810c-c28369cda247&expirationTimestamp=1682579131309&signature=wFuGHeDP3BziCSpQC4kHc2QjQtXVSisZ-ty1f558NNo&downloadName=Untitled.png">
-
 ## 1. 초기화 방법
 먼저 아래의 3가지를 설치해주셔야합니다.
 - Java 11 이상 설치
@@ -14,5 +11,18 @@ Swagger
 
     ./gradlew build
 ## 3. 테스트 방법
-IntelliJ IDEA에서 "src/test/java" 폴더 안에 있는 테스트 클래스를 우클릭하여 "Run"을 선택하면 테스트가 실행됩니다.
+
+1. KjkmovieApplication를 실행해주면 됩니다.
+2. API 및 Dto 등 에 대해서는 Swagger를 통해 확인하실 수 있습니다. 
+
+
+    http://localhost:8080/swagger-ui.html
+
+![API image](img src="https://file.notion.so/f/s/a93e1e85-73fd-422d-98ad-f4cbd7d4195b/Untitled.png?id=e303541a-ac01-484c-befd-abd7620593ce&table=block&spaceId=1c944271-6073-4a3a-810c-c28369cda247&expirationTimestamp=1682641909045&signature=KwrnwzwRMFMEXjP5cgOf3urszcPngwoy3HyFMGii8iQ&downloadName=Untitled.png")
+
+3. 데이터는 H2 저장소를 통해 확인할수 있습니다.
+
+
+    http://localhost:8080/h2-console/, 아이디:test, 비밀번호는 없이 바로 Connect 눌러주시면 됩니다.
+
 
