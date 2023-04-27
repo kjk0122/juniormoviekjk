@@ -18,11 +18,11 @@
 
     http://localhost:8080/swagger-ui.html
 
-![image](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa93e1e85-73fd-422d-98ad-f4cbd7d4195b%2FUntitled.png?id=e303541a-ac01-484c-befd-abd7620593ce&table=block&spaceId=1c944271-6073-4a3a-810c-c28369cda247&width=2000&userId=f13c2722-b3e5-444d-8cf6-06c9255e30bf&cache=v2)
-
 3. 데이터는 H2 저장소를 통해 확인할수 있습니다.
 
 
-    http://localhost:8080/h2-console/, 아이디:test, 비밀번호는 없이 바로 Connect 눌러주시면 됩니다.
+    http://localhost:8080/h2-console/
+
+아이디:test, 비밀번호는 없이 바로 Connect 눌러주시면 됩니다.
 
 
