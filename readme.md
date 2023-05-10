@@ -24,5 +24,5 @@
     http://localhost:8080/h2-console/
 
 아이디:test, 비밀번호는 없이 바로 Connect 눌러주시면 됩니다.
-
+수정 예정
 
