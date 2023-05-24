@@ -22,9 +22,7 @@ public class MovieService {
                 title, releaseYear, genre, director, actors, rating, runtime, synopsis, ageRating, dubbingLanguages, subtitleLanguages
         ).stream().map(MovieResponseDto::new).collect(Collectors.toList());
     }
-
-
-    public MovieResponseDto getMovie(Long movie_id) {
+    public MovieResponseDto getMovie(Long movie_id) throws NoSuchElementException{
         Movie movie = movieRepository.findById(movie_id).orElseThrow(
                 () -> new NoSuchElementException("존재하지 않는 내용입니다")
         );
@@ -40,7 +38,6 @@ public class MovieService {
         movieRepository.save(movie);
         return new MovieResponseDto(movie);
     }
-
     @Transactional
     public MovieResponseDto updateMovie(Long movie_id, MovieRequestDto movieRequestDto) {
         Movie movie = movieRepository.findById(movie_id).orElseThrow(
