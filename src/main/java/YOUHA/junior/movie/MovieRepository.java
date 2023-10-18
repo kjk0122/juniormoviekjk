@@ -22,7 +22,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "(:synopsis IS NULL OR m.synopsis LIKE %:synopsis%) AND " +
             "(:ageRating IS NULL OR m.ageRating = :ageRating) AND " +
             "(:dubbingLanguages IS NULL OR dubbingLangs IN :dubbingLanguages) AND " +
-            "(:subtitleLanguages IS NULL OR subtitleLangs IN :subtitleLanguages)"
+            "(:subtitleLanguages IS NULL OR subtitleLangs IN :subtitleLanguages)"  //이렇게 긴 쿼리문 나누기...어쩐다...
     )
     List<Movie> findByConditions(
             @Param("title") String title,
